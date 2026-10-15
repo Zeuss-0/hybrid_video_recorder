@@ -1,0 +1,22 @@
+<launch>
+  <arg name="config" default="$(find hybrid_video_recorder)/config/default.yaml" />
+
+  <group ns="hybrid_video_recorder">
+    <node pkg="hybrid_video_recorder" type="hybrid_video_worker_node.py"
+          name="raw" output="screen">
+      <rosparam command="load" file="$(arg config)" />
+      <param name="role" value="raw" />
+    </node>
+
+    <node pkg="hybrid_video_recorder" type="hybrid_video_worker_node.py"
+          name="aimed" output="screen">
+      <rosparam command="load" file="$(arg config)" />
+      <param name="role" value="aimed" />
+    </node>
+  </group>
+
+  <node pkg="hybrid_video_recorder" type="hybrid_video_manager_node.py"
+        name="video_recording_manager_node" output="screen">
+    <rosparam command="load" file="$(arg config)" />
+  </node>
+</launch>

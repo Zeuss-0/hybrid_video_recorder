@@ -1,0 +1,7 @@
+string command
+string session_id
+string output_dir
+---
+bool success
+string message
+string output_path

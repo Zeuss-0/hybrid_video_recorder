@@ -1,0 +1,19 @@
+image_topic: /camera/image_raw
+recording_root: /home/shansu/catkin_ws/src/mvs/scripts/recordings
+fps: 30.0
+writer_queue_size: 120
+first_frame_timeout: 10.0
+writer_finalize_timeout: 20.0
+ffmpeg_preset: veryfast
+
+raw_control_service: /hybrid_video_recorder/raw/control
+aimed_control_service: /hybrid_video_recorder/aimed/control
+worker_service_timeout: 30.0
+
+state_topic: /teleop_joy_ctrl/video/state
+status_topic: /teleop_joy_ctrl/video/status
+output_dir_topic: /teleop_joy_ctrl/video/output_dir
+start_service: /teleop_joy_ctrl/video/start
+pause_service: /teleop_joy_ctrl/video/pause
+resume_service: /teleop_joy_ctrl/video/resume
+stop_service: /teleop_joy_ctrl/video/stop
