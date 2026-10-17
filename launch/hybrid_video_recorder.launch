@@ -1,16 +1,24 @@
 <launch>
   <arg name="config" default="$(find hybrid_video_recorder)/config/default.yaml" />
+  <!-- Non-empty value replaces recording_root from the config file.
+       Leave empty to keep the yaml value, $HYBRID_VIDEO_RECORDING_ROOT,
+       or <package>/recordings. -->
+  <arg name="recording_root" default="" />
 
   <group ns="hybrid_video_recorder">
     <node pkg="hybrid_video_recorder" type="hybrid_video_worker_node.py"
           name="raw" output="screen">
       <rosparam command="load" file="$(arg config)" />
+      <param name="recording_root" value="$(arg recording_root)"
+             if="$(eval arg('recording_root') != '')" />
       <param name="role" value="raw" />
     </node>
 
     <node pkg="hybrid_video_recorder" type="hybrid_video_worker_node.py"
           name="aimed" output="screen">
       <rosparam command="load" file="$(arg config)" />
+      <param name="recording_root" value="$(arg recording_root)"
+             if="$(eval arg('recording_root') != '')" />
       <param name="role" value="aimed" />
     </node>
   </group>
@@ -18,5 +26,7 @@
   <node pkg="hybrid_video_recorder" type="hybrid_video_manager_node.py"
         name="video_recording_manager_node" output="screen">
     <rosparam command="load" file="$(arg config)" />
+    <param name="recording_root" value="$(arg recording_root)"
+           if="$(eval arg('recording_root') != '')" />
   </node>
 </launch>

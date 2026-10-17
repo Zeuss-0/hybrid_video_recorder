@@ -11,6 +11,11 @@ import rospy
 from std_msgs.msg import String
 from std_srvs.srv import Trigger, TriggerResponse
 
+from hybrid_video_recorder.paths import (
+    ENV_RECORDING_ROOT,
+    package_directory,
+    resolve_recording_root,
+)
 from hybrid_video_recorder.recording_state import (
     ERROR,
     IDLE,
@@ -46,9 +51,12 @@ class HybridVideoManager(object):
     def __init__(self):
         self.lock = threading.RLock()
         self.state = RecordingState()
-        self.recording_root = os.path.abspath(os.path.expanduser(rospy.get_param(
-            "~recording_root", "/home/shansu/catkin_ws/src/mvs/scripts/recordings"
-        )))
+        self.recording_root = resolve_recording_root(
+            rospy.get_param("~recording_root", ""),
+            os.environ.get(ENV_RECORDING_ROOT, ""),
+            package_directory(),
+        )
+        rospy.loginfo("混合录像管理器: recording_root=%s", self.recording_root)
         self.worker_timeout = float(rospy.get_param("~worker_service_timeout", 30.0))
         self.raw_service_name = rospy.get_param(
             "~raw_control_service", "/hybrid_video_recorder/raw/control"
