@@ -1,5 +1,7 @@
 image_topic: /camera/image_raw
-recording_root: /home/shansu/catkin_ws/src/mvs/scripts/recordings
+# Empty: $HYBRID_VIDEO_RECORDING_ROOT, else <rospack find hybrid_video_recorder>/recordings.
+# A non-empty launch arg recording_root overrides this value. ~ and relative paths are expanded.
+recording_root: ""
 fps: 30.0
 writer_queue_size: 120
 first_frame_timeout: 10.0

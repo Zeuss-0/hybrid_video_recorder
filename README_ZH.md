@@ -47,7 +47,23 @@ roslaunch teleop_joy_ctrl teleop_joy_ctrl.launch
 
 ## 配置与状态
 
-在 [config/default.yaml](config/default.yaml) 中修改 `image_topic`、`recording_root`、`fps` 及写入参数。默认保存目录：`/home/shansu/catkin_ws/src/mvs/scripts/recordings/<时间戳>/`。
+在 [config/default.yaml](config/default.yaml) 中修改 `image_topic`、`recording_root`、`fps` 及写入参数。每次录像目录为 `<recording_root>/<时间戳>/`。
+
+`recording_root` 按以下顺序确定：
+
+1. 非空的启动参数 `recording_root`。
+2. 配置文件中的 ROS 参数 `~recording_root`。
+3. 参数为空时，使用环境变量 `HYBRID_VIDEO_RECORDING_ROOT`。
+4. `<功能包>/recordings`。`<功能包>` 为 `rospack find hybrid_video_recorder` 的结果。
+
+`~` 会展开。相对路径相对于功能包目录解析。
+
+```bash
+export HYBRID_VIDEO_RECORDING_ROOT=~/recordings
+
+roslaunch hybrid_video_recorder hybrid_video_recorder.launch \
+  recording_root:=~/recordings
+```
 
 ```bash
 rostopic echo /teleop_joy_ctrl/video/status

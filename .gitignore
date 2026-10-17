@@ -1,0 +1,51 @@
+# Catkin / ROS workspace products
+devel/
+logs/
+build/
+bin/
+lib/
+msg_gen/
+srv_gen/
+build_isolated/
+devel_isolated/
+install/
+install_isolated/
+.catkin_workspace
+CATKIN_IGNORE
+
+# Dynamic reconfigure and generated message code
+*.cfgc
+/cfg/cpp/
+/cfg/*.py
+msg/*Action.msg
+msg/*ActionFeedback.msg
+msg/*ActionGoal.msg
+msg/*ActionResult.msg
+msg/*Feedback.msg
+msg/*Goal.msg
+msg/*Result.msg
+msg/_*.py
+srv/_*.py
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+
+# Default package-relative recording output
+/recordings/
+
+# Editor and OS
+.project
+.cproject
+CMakeLists.txt.user
+*.user
+qtcreator-*
+*~
+.#*
+.DS_Store
+Thumbs.db

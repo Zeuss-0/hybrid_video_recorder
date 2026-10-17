@@ -4,8 +4,8 @@
   <version>0.1.0</version>
   <description>Fault-isolated raw and pause-aware ROS image-topic recorders.</description>
 
-  <maintainer email="todo@example.com">todo</maintainer>
-  <license>TODO</license>
+  <maintainer email="jixuyang0715@gmail.com">Jiuxu Yang</maintainer>
+  <license>Apache-2.0</license>
 
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>message_generation</build_depend>

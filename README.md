@@ -47,7 +47,23 @@ The recorder does not start or stop the camera. Ending a session leaves the sepa
 
 ## Configuration and Status
 
-Edit [config/default.yaml](config/default.yaml) for `image_topic`, `recording_root`, `fps`, and writer settings. Default output directory: `/home/shansu/catkin_ws/src/mvs/scripts/recordings/<timestamp>/`.
+Edit [config/default.yaml](config/default.yaml) for `image_topic`, `recording_root`, `fps`, and writer settings. Session directories are `<recording_root>/<timestamp>/`.
+
+`recording_root` is resolved in this order:
+
+1. Launch argument `recording_root`, when it is not empty.
+2. ROS parameter `~recording_root` from the config file.
+3. Environment variable `HYBRID_VIDEO_RECORDING_ROOT`, when the parameter is empty.
+4. `<package>/recordings`, where `<package>` is `rospack find hybrid_video_recorder`.
+
+`~` is expanded. A relative path is resolved against the package directory.
+
+```bash
+export HYBRID_VIDEO_RECORDING_ROOT=~/recordings
+
+roslaunch hybrid_video_recorder hybrid_video_recorder.launch \
+  recording_root:=~/recordings
+```
 
 ```bash
 rostopic echo /teleop_joy_ctrl/video/status
